@@ -4,6 +4,7 @@ var chosenWordArray =[];
 var	remainingGuesses =10;
 var gamesWon =0;
 var lettersGuessed =[];
+var gameOver = false;
 
 
 
@@ -17,13 +18,14 @@ console.log(chosenWordArray);
 function hangmanSelector() {
 	var selector = Math.floor(Math.random()* thronesList.length);
 	var hangmanIndex = thronesList[selector];
-	console.log(hangmanIndex);
-	console.log(selector);
+	/*console.log(hangmanIndex);
+	console.log(selector);*/
 	/* parsing out the word that was chosen into characters and putting into a string*/
 	for (var i =0 ; i < hangmanIndex.length ; i++ ){
 		 chosenWordArray.push(hangmanIndex.charAt(i));
-		 console.log(chosenWordArray);
+		
 	}
+	 console.log(chosenWordArray);
  }
 
 /* -------------------------------------------------------------*/
@@ -49,8 +51,25 @@ document.onkeyup = function(event) {
 	console.log("guesses remaining: " +remainingGuesses);
 
 /* letters already guessed */ 
-		 lettersGuessed.push(userGuess);
-		 console.log("letters guessed already: " + lettersGuessed);
+	lettersGuessed.push(userGuess);
+	console.log("letters guessed already: " + lettersGuessed);
+
+
+/* if game needs to be reset (player wins or looses)*/
+if (gameOver === true) {
+	hangmanSelector();
+	remainingGuesses =10;
+	lettersGuessed =[];
+}
+
+
+
+
+
+
+
+
+
 
 }
 

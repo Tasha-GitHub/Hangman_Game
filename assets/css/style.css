@@ -26,4 +26,17 @@ section img {
 article {
 	border-style: dotted;
 	border-width: 3px;
+	margin-top: 20px;
 }
+
+body {
+	background-color: gray;
+}
+
+.banner img{
+	height: 100px;
+}
+
+/*.stark img{
+	height: 200px;
+}*/
