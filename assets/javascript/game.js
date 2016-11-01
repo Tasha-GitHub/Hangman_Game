@@ -1,6 +1,10 @@
 /* avaiable words to guess */
 var thronesList = ["baratheon", "bolton", "florent", "lannister", "martell","redwyne", "stark", "umber", "targaryen","tully"];
 var chosenWordArray =[];
+var	remainingGuesses =10;
+var gamesWon =0;
+var lettersGuessed =[];
+
 
 
 console.log(thronesList);
@@ -25,11 +29,14 @@ function hangmanSelector() {
 /* -------------------------------------------------------------*/
 
 
-/* listening and picking up user entry*/
+
 document.onkeyup = function(event) {
+
+/* listening and picking up user entry*/	
 	var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-	console.log(userGuess);
-/*checking to see if the users entry is part of the chosen hangman work*/
+	console.log("user guesses the letter: " + userGuess);
+
+/* looking to see if user entry is in the current array and counting remaining guesses*/ 
 	console.log(chosenWordArray.indexOf(userGuess));
 	var isPartOfWord = chosenWordArray.indexOf(userGuess);
 
@@ -37,9 +44,15 @@ document.onkeyup = function(event) {
 		console.log("part of hangan word");
 	} else {
 		console.log("not in word");
+		remainingGuesses--;
 	}
+	console.log("guesses remaining: " +remainingGuesses);
+
+/* letters already guessed */ 
+		 lettersGuessed.push(userGuess);
+		 console.log("letters guessed already: " + lettersGuessed);
 
 }
 
-/* looking to see if user entry is in the current array*/ 
+
 hangmanSelector();
