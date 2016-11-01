@@ -21,6 +21,7 @@ console.log(chosenWordArray);*/
 /* picking an item out of my master list to play hangman with*/
 function hangmanSelector() {
 	chosenWordArray =[];
+	templateArray =[];
 	var selector = Math.floor(Math.random()* thronesList.length);
 	var hangmanIndex = thronesList[selector];
 	/*console.log(hangmanIndex);
