@@ -1,10 +1,11 @@
-var thronesList = ["House Baratheon", "House Bolton", "House Florent", "House Lannister", "House Martell","House Redwyne", "House Stark", "House Umber", "House Targaryen","House Tully"];
-
-
-console.log(Math.floor(Math.random()* thronesList.length + 1));
-console.log("thrones list lenght: " + thronesList.length);
+var thronesList = ["baratheon", "bolton", "florent", "lannister", "martell","redwyne", "stark", "umber", "targaryen","tully"];
 
 function hangmanSelector() {
-	console.log(Math.random());
+	var selector = Math.floor(Math.random()* thronesList.length);
+	var hangmanIndex = thronesList[selector];
+	console.log(hangmanIndex);
+	console.log(selector);
 
 }
+
+hangmanSelector();

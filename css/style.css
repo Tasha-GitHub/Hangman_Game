@@ -1,0 +1,29 @@
+/* altering bootstrap css*/
+.row{
+	margin: 0px;
+	padding: 0px;
+}
+
+.container-fluid{
+	margin: 0px;
+	padding: 0px;
+}
+
+/* CSS styling*/
+p {
+	text-align: center;
+}
+
+h1{
+	text-align: center;
+}
+
+section img {
+	height: 100px;
+	width: 100%;
+}
+
+article {
+	border-style: dotted;
+	border-width: 3px;
+}
