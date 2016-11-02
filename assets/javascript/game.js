@@ -59,44 +59,54 @@ document.onkeyup = function(event) {
 	}
 	console.log("guesses remaining: " +remainingGuesses);
 
+/* stops user from putting in the same letter */
+	var isAlreadyTyped = lettersGuessed.indexOf(userGuess);
+	if(isAlreadyTyped > 0){
+		console.log(" you already typed that letter");
+
+	} else {
+		console.log("you have not typed this before");
+	}
+	console.log("isalreadytyped: " + isAlreadyTyped);
+	console.log("letters guessed array is " +lettersGuessed);
+
+
 /* letters already guessed */ 
 	lettersGuessed.push(userGuess);
 	console.log("letters guessed already: " + lettersGuessed);
 
-
 /* determines if game is over user lost*/
-if (remainingGuesses === 0) {
-	userWon = true;
-	gameOver = true;
-}
+	if (remainingGuesses === 0) {
+		userWon = true;
+		gameOver = true;
+	}
 
 /* determines if game is over and user won*/
-if (templateArray.length === 0) {
-	userLost = true;
-	gameOver = true;
-}
+	if (templateArray.length === 0) {
+		userLost = true;
+		gameOver = true;
+	}
 
 /* if game needs to be reset (player wins or looses)*/
-if (gameOver === true && userWon === true) {
-	hangmanSelector();
-	/*add in template word reset*/
-	remainingGuesses =10;
-	lettersGuessed =[];
-	gamesWon++;
-	userLost = false;
-	gameOver = false;
-} else if (gameOver === true && userLost === true) {
-	hangmanSelector();
-	/*add in template word reset*/
-	remainingGuesses =10;
-	lettersGuessed =[];
-	gamesLost++;
-	userLost = false;
-	gameOver = false;
-} 
-else {
-	/*do nothing*/
-}
+	if (gameOver === true && userWon === true) {
+		hangmanSelector();
+		remainingGuesses =10;
+		lettersGuessed =[];
+		gamesWon++;
+		userLost = false;
+		gameOver = false;
+
+	} else if (gameOver === true && userLost === true) {
+		hangmanSelector();
+		remainingGuesses =10;
+		lettersGuessed =[];
+		gamesLost++;
+		userLost = false;
+		gameOver = false;
+	} 
+	else {
+		/*do nothing*/
+	}
 
 
 

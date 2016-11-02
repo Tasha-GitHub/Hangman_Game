@@ -1,5 +1,5 @@
 # Project Type
-Hangman Game
+Hangman Game arcade style game
 
 #Techonolgies Used
 HTML
