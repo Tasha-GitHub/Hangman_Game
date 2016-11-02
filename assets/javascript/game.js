@@ -34,7 +34,25 @@ function hangmanSelector() {
 	}
 	 console.log("chosen word is "+chosenWordArray);
 	 console.log("template word is "+templateArray);
- }
+
+
+// /*--- this part of code will build out the html portion that is of equal length to my word----*/
+//     // 1. Create code that "grabs" the div with the matching id (#drinkOptions);
+
+    var targetDiv = document.getElementById("letterBlock");
+
+
+//     // 2. Create a for loop that creates HTML content of all the drinks using Javascript.
+//     // HINT: You will need to use each of the following methods: createElement, innerHTML, appendChild
+//     // ...
+    for(var i = 0 ; i < chosenWordArray.length; i++){
+      var currentLetter = chosenWordArray[i];
+      console.log(currentLetter);
+      var newDiv = document.createElement("div");
+     newDiv.innerHTML = currentLetter;
+     targetDiv.appendChild(newDiv);
+    }
+   }
 
 /* -------------------------------------------------------------*/
 hangmanSelector();
