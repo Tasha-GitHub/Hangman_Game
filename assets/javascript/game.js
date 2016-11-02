@@ -47,7 +47,6 @@ function hangmanSelector() {
 //     // ...
     for(var i = 0 ; i < chosenWordArray.length; i++){
       var currentLetter = chosenWordArray[i];
-      console.log(currentLetter);
       var newDiv = document.createElement("div");
      newDiv.innerHTML = currentLetter;
      targetDiv.appendChild(newDiv);
@@ -107,6 +106,9 @@ document.onkeyup = function(event) {
 /* letters already guessed */ 
 	lettersGuessed.push(userGuess);
 	console.log("letters guessed already: " + lettersGuessed);
+    var newLetterDiv = document.getElementById("lettersGuessed");
+    newLetterDiv.innerHTML = lettersGuessed;
+
 
 /* determines if game is over user lost*/
 	if (remainingGuesses === 0) {
