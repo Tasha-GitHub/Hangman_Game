@@ -1,4 +1,4 @@
-/* avaiable words to guess */
+/* available words to guess */
 var thronesList = ["baratheon", "bolton", "florent", "lannister", "martell","redwyne", "stark", "umber", "targaryen","tully"];
 var chosenWordArray =[];
 var templateArray =[]; /*used to determine if user won*/
@@ -19,20 +19,17 @@ function hangmanSelector() {
 	templateArray =[];
 	var selector = Math.floor(Math.random()* thronesList.length);
 	var hangmanIndex = thronesList[selector];
-	// console.log(hangmanIndex);
-	// console.log(selector);
 
-/* parsing out the word that was chosen into characters and putting into a string*/
+
+
+/* parsing out the word that was chosen into characters and putting into an array*/
 	for (var i =0 ; i < hangmanIndex.length ; i++ ){
 		 chosenWordArray.push(hangmanIndex.charAt(i));
 		 templateArray.push(hangmanIndex.charAt(i))
 		
 	}
-	 console.log("chosen word is "+chosenWordArray);
-	//console.log("template word is "+templateArray);
 
-
-// /*--- this part of code will build out the html portion that is of equal length to my word and assign a class for styling----*/
+/*--- this part of code will build out the html portion that is of equal length to my word and assign a class for styling----*/
     var targetDiv = document.getElementById("letterBlock");
 
     for(var i = 0 ; i < chosenWordArray.length; i++){
@@ -53,7 +50,6 @@ document.onkeyup = function(event) {
 
 /* listening and picking up user entry*/	
 	var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-	//console.log("user guesses the letter: " + userGuess);
 
 /* stops user from putting in the same letter twice*/
 	var isAlreadyTyped = lettersGuessed.indexOf(userGuess);
@@ -62,14 +58,9 @@ document.onkeyup = function(event) {
 		return;
 
 	} else {
-		//console.log("you have not typed this before");
 	}
-	//console.log("isalreadytyped: " + isAlreadyTyped);
-	//console.log("letters guessed array is " +lettersGuessed);
-
 /* builds letters already guessed array and pushes to HTML */ 
 	lettersGuessed.push(userGuess);
-	//console.log("letters guessed already: " + lettersGuessed);
     var newLetterDiv = document.getElementById("lettersGuessed");
     newLetterDiv.innerHTML = "<p>" + lettersGuessed + "</p>";
 
@@ -77,8 +68,7 @@ document.onkeyup = function(event) {
 /* looking to see if user entry is in the current array and counting remaining guesses*/ 
 	var isPartOfWord = chosenWordArray.indexOf(userGuess);
 
-	//console.log("what isvariable is part of word = "+ isPartOfWord);
-/* this part runs the checks to see if and element in the chosen word appears more than once*/
+/* this part runs the checks to see if element in the chosen word appears more than once*/
 	   
 	   	var chosenWordDivs = document.getElementsByClassName("letterDiv");
 
@@ -86,8 +76,6 @@ document.onkeyup = function(event) {
 	    for (var i = 0; i < chosenWordArray.length; i++) {
 	        if (chosenWordArray[i] === userGuess) {
 	            count++;
-	            //console.log("users guess is " + userGuess + " i = " + i + " index of div is "+ chosenWordArray[i]);
-	            //console.log(chosenWordDivs[i]);
 	            chosenWordDivs[i].innerHTML = chosenWordArray[i];
 	        }
 
@@ -97,11 +85,9 @@ document.onkeyup = function(event) {
 /*this will check and see if the guess is part of the main word and reduces remaining guesses*/
 		if(isPartOfWord >= 0){
 			for (var i =0; i < count; i++){
-			//console.log(" this is part of hangan word");
 			templateArray.pop();
 			}
 		} else {
-			//console.log("this is not in word");
 			remainingGuesses--;
 			var remainGuessDiv = document.getElementById("remainingGuesses");
     		remainGuessDiv.innerHTML = "<p>" + remainingGuesses + "</p>";
@@ -124,7 +110,6 @@ document.onkeyup = function(event) {
 		var newWinDiv = document.getElementById("winScore");
     	newWinDiv.innerHTML = "<p>" + gamesWon + "</p>";
 	}
-console.log(lettersGuessed);
 /* runs when game needs to be reset (player wins or looses) is powered by above statements*/
 	if (gameOver === true && userWon === true) {
 		lettersGuessed =[];
@@ -138,7 +123,7 @@ console.log(lettersGuessed);
 		remainingGuesses =10;
 		userLost = false;
 		gameOver = false;
-console.log(lettersGuessed);
+
 
 	} else if (gameOver === true && userLost === true) {
 		lettersGuessed =[];
