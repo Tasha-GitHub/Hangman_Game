@@ -12,6 +12,7 @@
 /* CSS styling*/
 p {
 	text-align: center;
+	clear:both;
 }
 
 h1{
@@ -35,6 +36,20 @@ body {
 
 .banner img{
 	height: 100px;
+}
+
+.letterDiv {
+	height: 10px;
+	width: 10px;
+	float: left;
+	padding-bottom: 30px;
+	/*visibility: hidden;*/
+
+}
+
+.showLetter{
+	visibility: hidden;
+
 }
 
 /*.stark img{

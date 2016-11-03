@@ -12,11 +12,6 @@ var userLost = false;
 
 
 
-/*console.log(thronesList);
-console.log(chosenWordArray);*/
-
-/* ----- needs to be inside of a function that starts and restarts the game ----- */
-
 
 /* picking an item out of my master list to play hangman with*/
 function hangmanSelector() {
@@ -24,120 +19,133 @@ function hangmanSelector() {
 	templateArray =[];
 	var selector = Math.floor(Math.random()* thronesList.length);
 	var hangmanIndex = thronesList[selector];
-	/*console.log(hangmanIndex);
-	console.log(selector);*/
+	// console.log(hangmanIndex);
+	// console.log(selector);
+
 /* parsing out the word that was chosen into characters and putting into a string*/
 	for (var i =0 ; i < hangmanIndex.length ; i++ ){
 		 chosenWordArray.push(hangmanIndex.charAt(i));
 		 templateArray.push(hangmanIndex.charAt(i))
 		
 	}
-	 console.log("chosen word is "+chosenWordArray);
-	 console.log("template word is "+templateArray);
+	 //console.log("chosen word is "+chosenWordArray);
+	//console.log("template word is "+templateArray);
 
 
-// /*--- this part of code will build out the html portion that is of equal length to my word----*/
-//     // 1. Create code that "grabs" the div with the matching id (#drinkOptions);
-
+// /*--- this part of code will build out the html portion that is of equal length to my word and assign a class for styling----*/
     var targetDiv = document.getElementById("letterBlock");
 
-
-//     // 2. Create a for loop that creates HTML content of all the drinks using Javascript.
-//     // HINT: You will need to use each of the following methods: createElement, innerHTML, appendChild
-//     // ...
     for(var i = 0 ; i < chosenWordArray.length; i++){
       var currentLetter = chosenWordArray[i];
       var newDiv = document.createElement("div");
-     newDiv.innerHTML = currentLetter;
-     targetDiv.appendChild(newDiv);
+      newDiv.innerHTML = currentLetter;
+      targetDiv.appendChild(newDiv);
+      newDiv.setAttribute("class", "letterDiv")
     }
    }
 
-/* -------------------------------------------------------------*/
+/* inital game set up */
 hangmanSelector();
 
+/*function will run each time user pushes key*/
 
 document.onkeyup = function(event) {
 
 /* listening and picking up user entry*/	
 	var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-	console.log("user guesses the letter: " + userGuess);
+	//console.log("user guesses the letter: " + userGuess);
 
-/* looking to see if user entry is in the current array and counting remaining guesses --edit this comment*/ 
+/* stops user from putting in the same letter twice*/
+	var isAlreadyTyped = lettersGuessed.indexOf(userGuess);
+	if(isAlreadyTyped >= 0){
+		alert(" you already typed that letter");
+		return;
+
+	} else {
+		//console.log("you have not typed this before");
+	}
+	//console.log("isalreadytyped: " + isAlreadyTyped);
+	//console.log("letters guessed array is " +lettersGuessed);
+
+/* builds letters already guessed array and pushes to HTML */ 
+	lettersGuessed.push(userGuess);
+	console.log("letters guessed already: " + lettersGuessed);
+    var newLetterDiv = document.getElementById("lettersGuessed");
+    newLetterDiv.innerHTML = "<p>" + lettersGuessed + "</p>";
+
+
+/* looking to see if user entry is in the current array and counting remaining guesses*/ 
 	var isPartOfWord = chosenWordArray.indexOf(userGuess);
 
 	console.log("what isvariable is part of word = "+ isPartOfWord);
-/*checks to see if and element in the chosen word appears more than once*/
+/* this part runs the checks to see if and element in the chosen word appears more than once*/
 	    var count = 0;
 	    for (var i = 0; i < chosenWordArray.length; i++) {
 	        if (chosenWordArray[i] === userGuess) {
 	            count++;
 	        }
 	    }
-	    console.log(chosenWordArray.length);
-	console.log("the count of items in an array is " + count);
+	 //console.log(chosenWordArray.length);
+	//console.log("the count of items in an array is " + count);
 
 
-/*this will check and see if the guess is part of the main word & account for duplicate letters ---edit this comment */
+/*this will check and see if the guess is part of the main word and reduces remaining guesses*/
 		if(isPartOfWord >= 0){
 			for (var i =0; i < count; i++){
 			console.log(" this is part of hangan word");
 			templateArray.pop();
-			console.log("the new template array is " + templateArray);
+			// console.log("the new template array is " + templateArray);
 			}
 		} else {
 			console.log("this is not in word");
 			remainingGuesses--;
+			var remainGuessDiv = document.getElementById("remainingGuesses");
+    		remainGuessDiv.innerHTML = "<p>" + remainingGuesses + "</p>";
 		}
-	console.log("guesses remaining: " +remainingGuesses);
-
-/* stops user from putting in the same letter --------needs work */
-	var isAlreadyTyped = lettersGuessed.indexOf(userGuess);
-	if(isAlreadyTyped > 0){
-		alert(" you already typed that letter");
-
-	} else {
-		console.log("you have not typed this before");
-	}
-	console.log("isalreadytyped: " + isAlreadyTyped);
-	console.log("letters guessed array is " +lettersGuessed);
+	// console.log("guesses remaining: " +remainingGuesses);
 
 
-/* letters already guessed */ 
-	lettersGuessed.push(userGuess);
-	console.log("letters guessed already: " + lettersGuessed);
-    var newLetterDiv = document.getElementById("lettersGuessed");
-    newLetterDiv.innerHTML = lettersGuessed;
 
 
-/* determines if game is over user lost*/
+/* runs when game is over and user lost*/
 	if (remainingGuesses === 0) {
 		userWon = true;
 		gameOver = true;
 		gamesLost++;
+		var newLoseDiv = document.getElementById("loseScore");
+    	newLoseDiv.innerHTML = "<p>" + gamesLost + "</p>";		
 	}
 
-/* determines if game is over and user won*/
+/* runs when  game is over and user won*/
 	if (templateArray.length === 0) {
 		userLost = true;
 		gameOver = true;
 		gamesWon++;
+		var newWinDiv = document.getElementById("winScore");
+    	newWinDiv.innerHTML = "<p>" + gamesWon + "</p>";
 	}
 
-/* if game needs to be reset (player wins or looses)*/
+/* runs when game needs to be reset (player wins or looses) is powered by above statements*/
 	if (gameOver === true && userWon === true) {
+		var newResetDiv = document.getElementById("letterBlock");
+    	newResetDiv.innerHTML = " ";
+    	var newResetRemainingDiv = document.getElementById("remainingGuesses");
+    	newResetRemainingDiv.innerHTML = "<p>" + 10 + "</p>";	
 		hangmanSelector();
 		remainingGuesses =10;
 		lettersGuessed =[];
-		gamesWon++;
 		userLost = false;
 		gameOver = false;
 
+
 	} else if (gameOver === true && userLost === true) {
+		var newResetDiv = document.getElementById("letterBlock");
+    	newResetDiv.innerHTML = " ";
+    	var newResetRemainingDiv = document.getElementById("remainingGuesses");
+    	newResetRemainingDiv.innerHTML = "<p>" + 10 + "</p>";		
 		hangmanSelector();
 		remainingGuesses =10;
 		lettersGuessed =[];
-		gamesLost++;
 		userLost = false;
 		gameOver = false;
 	} 
