@@ -44,11 +44,21 @@ body {
 	float: left;
 	padding-bottom: 30px;
 	/*visibility: hidden;*/
+	border-style: none none solid none;
+	border-width: 2px;
+	margin: 5px 5px 5px 5px;
 
 }
 
 .showLetter{
-	visibility: hidden;
+	height: 10px;
+	width: 10px;
+	float: left;
+	padding-bottom: 30px;
+	border-style: none none solid none;
+	border-width: 2px;
+	margin: 5px 5px 5px 5px;
+	visibility: visible;
 
 }
 

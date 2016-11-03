@@ -28,7 +28,7 @@ function hangmanSelector() {
 		 templateArray.push(hangmanIndex.charAt(i))
 		
 	}
-	 //console.log("chosen word is "+chosenWordArray);
+	 console.log("chosen word is "+chosenWordArray);
 	//console.log("template word is "+templateArray);
 
 
@@ -38,9 +38,9 @@ function hangmanSelector() {
     for(var i = 0 ; i < chosenWordArray.length; i++){
       var currentLetter = chosenWordArray[i];
       var newDiv = document.createElement("div");
-      newDiv.innerHTML = currentLetter;
+      newDiv.innerHTML = "_";
       targetDiv.appendChild(newDiv);
-      newDiv.setAttribute("class", "letterDiv")
+      newDiv.setAttribute("class", "letterDiv");
     }
    }
 
@@ -69,7 +69,7 @@ document.onkeyup = function(event) {
 
 /* builds letters already guessed array and pushes to HTML */ 
 	lettersGuessed.push(userGuess);
-	console.log("letters guessed already: " + lettersGuessed);
+	//console.log("letters guessed already: " + lettersGuessed);
     var newLetterDiv = document.getElementById("lettersGuessed");
     newLetterDiv.innerHTML = "<p>" + lettersGuessed + "</p>";
 
@@ -77,35 +77,35 @@ document.onkeyup = function(event) {
 /* looking to see if user entry is in the current array and counting remaining guesses*/ 
 	var isPartOfWord = chosenWordArray.indexOf(userGuess);
 
-	console.log("what isvariable is part of word = "+ isPartOfWord);
+	//console.log("what isvariable is part of word = "+ isPartOfWord);
 /* this part runs the checks to see if and element in the chosen word appears more than once*/
+	   
+	   	var chosenWordDivs = document.getElementsByClassName("letterDiv");
+
 	    var count = 0;
 	    for (var i = 0; i < chosenWordArray.length; i++) {
 	        if (chosenWordArray[i] === userGuess) {
 	            count++;
+	            //console.log("users guess is " + userGuess + " i = " + i + " index of div is "+ chosenWordArray[i]);
+	            //console.log(chosenWordDivs[i]);
+	            chosenWordDivs[i].innerHTML = chosenWordArray[i];
 	        }
-	    }
-	 //console.log(chosenWordArray.length);
-	//console.log("the count of items in an array is " + count);
 
+
+	    }
 
 /*this will check and see if the guess is part of the main word and reduces remaining guesses*/
 		if(isPartOfWord >= 0){
 			for (var i =0; i < count; i++){
-			console.log(" this is part of hangan word");
+			//console.log(" this is part of hangan word");
 			templateArray.pop();
-			// console.log("the new template array is " + templateArray);
 			}
 		} else {
-			console.log("this is not in word");
+			//console.log("this is not in word");
 			remainingGuesses--;
 			var remainGuessDiv = document.getElementById("remainingGuesses");
     		remainGuessDiv.innerHTML = "<p>" + remainingGuesses + "</p>";
 		}
-	// console.log("guesses remaining: " +remainingGuesses);
-
-
-
 
 /* runs when game is over and user lost*/
 	if (remainingGuesses === 0) {
@@ -124,28 +124,32 @@ document.onkeyup = function(event) {
 		var newWinDiv = document.getElementById("winScore");
     	newWinDiv.innerHTML = "<p>" + gamesWon + "</p>";
 	}
-
+console.log(lettersGuessed);
 /* runs when game needs to be reset (player wins or looses) is powered by above statements*/
 	if (gameOver === true && userWon === true) {
+		lettersGuessed =[];
+		var newLetterDiv = document.getElementById("lettersGuessed");
+    	newLetterDiv.innerHTML = "<p>" + lettersGuessed + "</p>";
 		var newResetDiv = document.getElementById("letterBlock");
     	newResetDiv.innerHTML = " ";
     	var newResetRemainingDiv = document.getElementById("remainingGuesses");
     	newResetRemainingDiv.innerHTML = "<p>" + 10 + "</p>";	
 		hangmanSelector();
 		remainingGuesses =10;
-		lettersGuessed =[];
 		userLost = false;
 		gameOver = false;
-
+console.log(lettersGuessed);
 
 	} else if (gameOver === true && userLost === true) {
+		lettersGuessed =[];
+		var newLetterDiv = document.getElementById("lettersGuessed");
+    	newLetterDiv.innerHTML = "<p>" + lettersGuessed + "</p>";
 		var newResetDiv = document.getElementById("letterBlock");
     	newResetDiv.innerHTML = " ";
     	var newResetRemainingDiv = document.getElementById("remainingGuesses");
     	newResetRemainingDiv.innerHTML = "<p>" + 10 + "</p>";		
 		hangmanSelector();
 		remainingGuesses =10;
-		lettersGuessed =[];
 		userLost = false;
 		gameOver = false;
 	} 
