@@ -76,7 +76,7 @@ document.onkeyup = function(event) {
 	    for (var i = 0; i < chosenWordArray.length; i++) {
 	        if (chosenWordArray[i] === userGuess) {
 	            count++;
-	            chosenWordDivs[i].innerHTML = chosenWordArray[i];
+	            chosenWordDivs[i].innerHTML = "<p>"+ chosenWordArray[i] + "</p>";
 	        }
 
 
@@ -141,14 +141,6 @@ document.onkeyup = function(event) {
 	else {
 		/*do nothing*/
 	}
-
-
-
-
-
-
-
-
 
 }
 
